@@ -1,8 +1,13 @@
 import './App.css';
+import CartItem from './Components/CartItem/CartItem';
+import Header from './Components/Header/Header';
 
 function App() {
   return (
-    <><h1>Welcome to Cart Application</h1></>
+    <div>
+      <Header />
+      <CartItem />
+    </div>
   );
 }
 
