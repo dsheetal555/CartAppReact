@@ -1,56 +1,61 @@
-import React from "react";
+import React, { useState } from "react";
 import "./CartItem.css";
+import ModalPopup from "../Modal/Modal";
 
-const CartItem = () => {
-  const addItemToCartFunction = () => {
-    console.log("heloo");
+const CartItem = (props) => {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [cartItem, setCartItem] = useState("");
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+  const editCartItem = (eachItem) => {
+    setCartItem(eachItem);
+    setModalIsOpen(true);
+  };
+  const deleteCartItem = (eachItem) => {
+    console.log(eachItem);
   };
   return (
     <div className="product-list">
-      <div className="product" key={"product.id"}>
-        <img src={""} alt={""} />
-        <h2>{"product.name"}</h2>
-        <p>Price: ₹{100}</p>
-        <button
-          className="add-to-cart-button"
-          onClick={() => addItemToCartFunction}
-        >
-          Add to Shopping Cart
-        </button>
-      </div>
-      <div className="product" key={"product.id"}>
-        <img src={""} alt={""} />
-        <h2>{"product.name"}</h2>
-        <p>Price: ₹{100}</p>
-        <button
-          className="add-to-cart-button"
-          onClick={() => addItemToCartFunction}
-        >
-          Add to Shopping Cart
-        </button>
-      </div>
-      <div className="product" key={"product.id"}>
-        <img src={""} alt={""} />
-        <h2>{"product.name"}</h2>
-        <p>Price: ₹{100}</p>
-        <button
-          className="add-to-cart-button"
-          onClick={() => addItemToCartFunction}
-        >
-          Add to Shopping Cart
-        </button>
-      </div>
-      <div className="product" key={"product.id"}>
-        <img src={""} alt={""} />
-        <h2>{"product.name"}</h2>
-        <p>Price: ₹{100}</p>
-        <button
-          className="add-to-cart-button"
-          onClick={() => addItemToCartFunction}
-        >
-          Add to Shopping Cart
-        </button>
-      </div>
+      <button
+        onClick={() => {
+          setModalIsOpen(true);
+          setCartItem("");
+        }}
+      >
+        Add NewItem
+      </button>
+      {props.items.map((item, i) => {
+        return (
+          <div className="product" key={i}>
+            <img src={""} alt={""} />
+            <h2>{item.name}</h2>
+            <p>Price: ₹{item.price}</p>
+            <p>{item.description}</p>
+            <button
+              className="add-to-cart-button"
+              onClick={() => editCartItem(item)}
+            >
+              Edit item
+            </button>
+            <button
+              className="add-to-cart-button"
+              onClick={() => deleteCartItem(item)}
+            >
+              delete item
+            </button>
+          </div>
+        );
+      })}
+      {modalIsOpen && (
+        <ModalPopup
+          closeModal={closeModal}
+          modalIsOpen={modalIsOpen}
+          cartItem={cartItem}
+        />
+      )}
+      ;
     </div>
   );
 };
