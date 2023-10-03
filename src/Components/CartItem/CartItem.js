@@ -26,11 +26,11 @@ const CartItem = (props) => {
       >
         Add NewItem
       </button>
-      {props.items.map((item, i) => {
+      {props.items?.map((item, i) => {
         return (
           <div className="product" key={i}>
             <img src={""} alt={""} />
-            <h2>{item.name}</h2>
+            <h2>{item.title}</h2>
             <p>Price: ₹{item.price}</p>
             <p>{item.description}</p>
             <button
@@ -55,7 +55,6 @@ const CartItem = (props) => {
           cartItem={cartItem}
         />
       )}
-      ;
     </div>
   );
 };
