@@ -3,25 +3,32 @@ import "./App.css";
 import CartItem from "./Components/CartItem/CartItem";
 import Header from "./Components/Header/Header";
 import { useEffect } from "react";
-//import items from "./mock.json";
+import Loader from "react-js-loader";
+import { getAllItemsApi } from "./Api/cartItemServiceApi";
 
 function App() {
-  const [items, setItems] = useState('')
-  const itemList = () => {
-    fetch("http://localhost:3001/api/cart").then((response) => response.json()).then((res) => {
-      console.log(res)
+  const [items, setItems] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const getItems = () => {
+    //console.log('about to call the getAllItem api call');
+    setIsLoading(true)
+    getAllItemsApi().then((res) => {
+      //console.log('getAllItem api completed',res.data);
       setItems(res.data);
+      setIsLoading(false);
     }).catch((error) => {
       console.log(error)
+      setIsLoading(false);
     });
   }
   useEffect(() => {
-    itemList();
+    getItems();
   }, [])
   return (
     <div>
       <Header />
-      {items && <CartItem items={items} />}
+      {isLoading ? (<Loader type="spinner-circle" bgColor={"black"} title={"spinner-circle"} color={'#FFFFFF'} size={100} />) :
+        (items && <CartItem items={items} getItems={getItems} />)}
     </div>
   );
 }

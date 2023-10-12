@@ -5,7 +5,7 @@ const ModalPopup = (props) => {
   const [updateItem, setUpdatItem] = useState({
     title: props.cartItem.title,
     price: props.cartItem.price,
-    desc: props.cartItem.description,
+    description: props.cartItem.description,
     id: props.cartItem.id
   });
 
@@ -16,23 +16,13 @@ const ModalPopup = (props) => {
     setUpdatItem({ ...updateItem, price: event.target.value });
   };
   const handleDescOnChange = (event) => {
-    setUpdatItem({ ...updateItem, desc: event.target.value });
+    setUpdatItem({ ...updateItem, description: event.target.value });
   };
-  const updateField = (data) => {
-    const requestOptions = {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    };
-    fetch('http://localhost:3001/api/cart/' + data.id, requestOptions)
-      .then(response => response.json())
-      .then(data => {
-        console.log(data)
-      }).catch((error) => {
-        console.log(error)
-      });;
-    props.closeModal();
-  };
+
+  const handleIdOnChange = (event) => {
+    setUpdatItem({ ...updateItem, id: event.target.value });
+  }
+
   return (
     <Modal isOpen={props.modalIsOpen} contentLabel="Example Modal">
       <h2>Edit the Fields</h2>
@@ -60,8 +50,16 @@ const ModalPopup = (props) => {
         onChange={handleDescOnChange}
       />
       <br />
+      Id :
+      <input
+        type="text"
+        name="price"
+        value={updateItem.id}
+        onChange={handleIdOnChange}
+      />
+      <br />
       <button onClick={props.closeModal}>close</button>
-      <button onClick={res => updateField(updateItem)}>{props.cartItem ? 'Update' : 'Add New Item'}</button>
+      <button onClick={() => props.cartItem ? props.updateItem(updateItem) : props.addNewItem(updateItem)}>{props.cartItem ? 'Update' : 'Add New Item'}</button>
     </Modal>
   );
 };
