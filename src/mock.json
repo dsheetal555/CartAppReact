@@ -1,0 +1,17 @@
+[
+    {
+        "price": "1",
+        "name": "Apple",
+        "description": "items"
+    },
+    {
+        "price": "1",
+        "name": "Dragonfruit",
+        "description": "items"
+    },
+    {
+        "price": "2",
+        "name": "Passionfruit",
+        "description": "items"
+    }
+]

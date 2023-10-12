@@ -1,0 +1,32 @@
+.App-header {
+    background-color: #6cc24a;
+    padding: 20px;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+.search-bar {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 5px 10px;
+}
+.search-bar input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #ffffff;
+    transition: background-color 0.3s ease-in-out;
+}
+ 
+.search-bar input:focus {
+    outline: none;
+    background-color: #ffffff;
+}
