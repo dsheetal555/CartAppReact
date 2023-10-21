@@ -46,7 +46,7 @@ const ModalPopup = (props) => {
       <input
         type="text"
         name="price"
-        value={updateItem.desc}
+        value={updateItem.description}
         onChange={handleDescOnChange}
       />
       <br />
